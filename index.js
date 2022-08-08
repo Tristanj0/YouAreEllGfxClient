@@ -9,7 +9,7 @@ window.addEventListener("load", function() {
   .then(successCallback, errorCallback);
 
   function successCallback(response) {
-  console.log(response);
+  populateMessages(response);
   }
 
   function errorCallback(response) {
