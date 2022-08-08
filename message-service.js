@@ -3,7 +3,7 @@ export default class MessageService {
 getAllMessages() {
 const request = new XMLHttpRequest();
 
-new Promise(function (resolve, reject){
+return new Promise(function (resolve, reject){
 // Setup our Listener to process completed requests
 request.onload = function() {
     if (request.status >= 200 && request.status < 300) {
@@ -20,15 +20,5 @@ request.onload = function() {
 request.open("GET", "http://zipcode.rocks:8085/messages");
 
 request.send();
- }).then(successCallback, errorCallback);
-
- function successCallback(response) {
- console.log(response);
- }
-
- function errorCallback(response) {
- console.log(response);
- }
-
-  }
+  })
 }
