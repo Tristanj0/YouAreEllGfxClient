@@ -35,3 +35,26 @@ messageListItem
    document.getElementById("message-list").appendChild(messageListItem);
 })
 }
+
+function createFormListener() {
+const form = document.getElementById("new-message-form");
+form.onsubmit = function (event) {
+  event.preventDefault();
+
+  const data = {
+      fromid: userId,
+      message: form.message.value
+  };
+
+  messageService.createNewMessage(data)
+      .then(successCallback, errorCallback);
+
+   function successCallback(response) {
+      console.log(response);
+   }
+
+   function errorCallback(response) {
+      console.log(response);
+   }
+ }
+};
