@@ -17,7 +17,10 @@ window.addEventListener("load", function() {
   }
 });
 
-function populateMessages(messages) {
+function populateMessages(message) {
+     message.forEach(message => {
+          addMessageToThread(message);
+     })
 }
 
 function populateThread(messages) {
@@ -42,7 +45,7 @@ form.onsubmit = function (event) {
   event.preventDefault();
 
   const data = {
-      fromid: userId,
+      fromid: currentUser,
       message: form.message.value
   };
 
@@ -50,7 +53,7 @@ form.onsubmit = function (event) {
       .then(successCallback, errorCallback);
 
    function successCallback(response) {
-      console.log(response);
+      addMessageToThread(response);
    }
 
    function errorCallback(response) {
@@ -58,3 +61,20 @@ form.onsubmit = function (event) {
    }
  }
 };
+
+function addMessageToThread(message) {
+    const messageListItem = document.createElement("LI");
+    const userIdHeading = document.createElement("h3");
+    const messageParagraph = document.createElement("p");
+    const messageContent = document.createTextNode(message.message);
+    const userIdContent = document.createTextNode(message.fromid);
+
+    userIdHeading.appendChild(userIdContent);
+    messageParagraph.appendChild(messageContent);
+    messageListItem
+         .appendChild(userIdHeading)
+         .appendChild(messageParagraph);
+    document.getElementById("message-list").appendChild(messageListItem);
+}
+
+createFormListener();
